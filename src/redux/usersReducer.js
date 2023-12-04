@@ -1,18 +1,25 @@
 import { types } from "./types";
 
-const initialState ={
-    inputValue: '',
-    users: []
+const initialState = {
+    users: [],
+    userAdditionalInfo: {}
 }
 
-export default function usersReducer(state = initialState, action){
-    switch(action.type){
-        case types.INPUT_VALUE:
-            return {...state, inputValue: action.payload}
-        case types.ADD_USER:
-            return { users: [...state.users, action.payload]}
-        case types.DELETE_USERS:
-            return {inputValue: '', users: []}
-        default: return state
+export default function usersReducer(state = initialState, action) {
+    switch (action.type) {
+        case types.USERS:
+            return { 
+                ...state,
+                users: action.payload };
+        case types.SINGLE_USER:
+            return {
+                ...state,
+                userAdditionalInfo: {
+                    ...state.userAdditionalInfo,
+                    [action.payload.id]: action.payload,
+                },
+            };
+        default:
+            return state;
     }
 }
