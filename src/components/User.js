@@ -6,15 +6,16 @@ function User({ userInfo }) {
     const dispatch = useDispatch();
     const userAdditionalInfo = useSelector(state => state.usersReducer.userAdditionalInfo);
 
-    const getOneUser = () => {
-        dispatch(fetchUserOneInfo(userInfo.id));
+    const getOneUser = (event) => {
+        dispatch(fetchUserOneInfo(event.target.value));
     };
+    
 
     return (
         <ul>
             <li>{userInfo.name}</li>
             <li>{userInfo.email}</li>
-            <button onClick={getOneUser}>get more</button>
+            <button value={userInfo.id} onClick={getOneUser}>get more</button>
             {userAdditionalInfo[userInfo.id] && (
                 <div>
                     <p>Phone: {userAdditionalInfo[userInfo.id].phone}</p>
